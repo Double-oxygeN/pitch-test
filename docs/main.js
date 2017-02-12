@@ -28,7 +28,8 @@
     answer,
     you = _.repeat(false, 12),
     questionNum = 0,
-    results = _.repeat({ real: [], you: [] }, 12);
+    results = _.repeat({ real: [], you: [], isRight: false }, 12),
+    right_answer = 0;
 
   function setKeyboardColor(y) {
     keys.forEach((key, i) => {
@@ -107,7 +108,7 @@
       createTableCellElement('th', (i + 1).toString(10)),
       createTableCellElement('td', getNoteNameFromArray(res[i].real)),
       createTableCellElement('td', getNoteNameFromArray(res[i].you)),
-      createTableCellElement('td', res[i].real.every((ele, idx) => ele === res[i].you[idx]) ? "GOOD" : "BAD")
+      createTableCellElement('td', res[i].isRight ? "GOOD" : "BAD")
     ]).forEach(a => {
       qname_row.appendChild(a[0]);
       right_row.appendChild(a[1]);
@@ -144,7 +145,8 @@
 
     results[questionNum] = {
       real: answer,
-      you: you
+      you: you,
+      isRight: answer.every((ele, idx) => ele === you[idx])
     };
 
     enviro.stop();
@@ -152,7 +154,10 @@
     setKeyboardColor(you);
     questionNum++;
     if (questionNum >= 12) {
-      desc.innerHTML = "終了です。";
+      let twitter_intent_url
+      right_answer = results.filter(r => r.isRight).length;
+      twitter_intent_url = "https://twitter.com/intent/tweet?text=%E7%B5%B6%E5%AF%BE%E9%9F%B3%E6%84%9F%E8%A8%BA%E6%96%AD+%E7%A7%81%E3%81%AF12%E5%95%8F%E4%B8%AD" + right_answer.toString(10) + "%E5%95%8F%E6%AD%A3%E8%A7%A3%E3%81%A7%E3%81%97%E3%81%9F&url=http%3A%2F%2Fdouble-oxygen.net%2Fpitch-test%2F";
+      desc.innerHTML = '終了です。<br><a href="' + twitter_intent_url + '">結果をTweet</a>';
       showResult(results, result_table);
       next_button.onclick = () => null;
     } else {
