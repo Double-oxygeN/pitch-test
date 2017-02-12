@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <title>sense_of_pitch</title>
+  <link rel="stylesheet" type="text/css" href="style.css"></link>
+  <script src="libraries/flocking/flocking-all.js" charset="utf-8"></script>
+  <script type="text/javascript" src="libraries/lib.js"></script>
+  <script src="libraries/color.js" charset="utf-8"></script>
+</head>
+
+<body>
+  <h1>絶対音感診断</h1>
+
+  <div id="content-wrap">
+    <p id="description"></p>
+    <div class="wide-button" id="play">PLAY</div>
+    <div id="keyboard">
+      <table>
+        <tr>
+          <td class="key" id="key_c">C</td>
+          <td class="key" id="key_cis">C♯<br>D♭</td>
+          <td class="key" id="key_d">D</td>
+          <td class="key" id="key_es">D♯<br>E♭</td>
+          <td class="key" id="key_e">E</td>
+          <td class="key" id="key_f">F</td>
+          <td class="key" id="key_fis">F♯<br>G♭</td>
+          <td class="key" id="key_g">G</td>
+          <td class="key" id="key_as">G♯<br>A♭</td>
+          <td class="key" id="key_a">A</td>
+          <td class="key" id="key_b">A♯<br>B♭</td>
+          <td class="key" id="key_h">B</td>
+        </tr>
+      </table>
+    </div>
+    <div class="wide-button" id="next">NEXT</div>
+    <div id="result"></div>
+  </div>
+
+  <script type="text/javascript" src="main.js"></script>
+</body>
+
+</html>

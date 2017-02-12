@@ -1,0 +1,58 @@
+body {
+  background-color: #FFFF99;
+}
+
+h1 {
+  text-align: center;
+  color: #666600;
+}
+
+#content-wrap {
+  margin: 0 auto;
+  width: 480px;
+}
+
+#description {
+  height: 60px;
+  width: auto;
+  text-align: left;
+}
+
+.wide-button {
+  text-align: center;
+  line-height: 60px;
+  margin: 0 auto;
+  height: 60px;
+  width: auto;
+  background-color: #333333;
+  color: #ffff99;
+}
+
+.wide-button:hover {
+  background-color: #cccccc;
+  color: #666600;
+}
+
+.wide-button:active {
+  background-color: #ffffff;
+}
+
+#keyboard {
+  background-color: #cccccc;
+  width: auto;
+}
+
+.key {
+  text-align: center;
+  color: #ffff99;
+  width: 40px;
+}
+
+.key:hover {
+  background-color: #ffff99 ! important;
+  color: #666600 ! important;
+}
+
+.key:active {
+  background-color: #ffffff ! important;
+}
