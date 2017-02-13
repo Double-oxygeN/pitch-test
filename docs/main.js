@@ -7,6 +7,7 @@
     desc = geti('description'),
     play_button = geti('play'),
     next_button = geti('next'),
+    a_chg_button = geti('change_A'),
     result_table = geti('result'),
     enviro = flock.init(),
     defaultSynth = freq => ({
@@ -29,7 +30,8 @@
     you = _.repeat(false, 12),
     questionNum = 0,
     results = _.repeat({ real: [], you: [], isRight: false }, 12),
-    right_answer = 0;
+    right_answer = 0,
+    pitch_A = 440;
 
   function setKeyboardColor(y) {
     keys.forEach((key, i) => {
@@ -45,7 +47,7 @@
 
   function genQuestion(harmony) {
     let pitchClasses = _.pipe(_.range(0, 12), [_.shuffle], [(a, n) => a.slice(0, n), harmony]),
-      freqs = pitchClasses.map(p => getFreqFromNoteNumber(p + 12 * Math.floor(Math.random() * 3 + 4), 440)),
+      freqs = pitchClasses.map(p => getFreqFromNoteNumber(p + 12 * Math.floor(Math.random() * 3 + 4), pitch_A)),
       ans = _.range(0, 12).map(i => pitchClasses.includes(i) ? true : false);
     return {
       frequencies: freqs,
@@ -140,6 +142,7 @@
     });
     enviro.start();
   };
+
   next_button.onclick = () => {
     let q;
 
@@ -166,6 +169,18 @@
       oscs = q.frequencies.map(f => defaultSynth(f)).map(syn => flock.synth(syn));
       desc.innerHTML = "(" + (questionNum + 1).toString(10) + "/12) 音を聴いて音名を答えよ。";
     }
+  };
+
+  a_chg_button.onclick = () => {
+    let input_pitch = window.prompt("A = ___Hz");
+    if ((/^[1-9][0-9]*\.?[0-9]*$/).test(input_pitch)) {
+      pitch_A = parseFloat(input_pitch);
+    } else {
+      pitch_A = 440;
+    }
+    a_chg_button.innerHTML = "A = " + pitch_A.toString(10) + "Hz";
+    you = _.repeat(false, 12);
+    window.onload();
   };
 
 })();
